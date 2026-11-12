@@ -10,6 +10,13 @@ Releases after 0.1.0 are prepared automatically by
 [Conventional Commits](https://www.conventionalcommits.org/). Do not edit the
 generated sections by hand.
 
+## [0.1.1](https://github.com/AndreVarandas/clash-royale-api-py/compare/v0.1.0...v0.1.1) (2026-11-12)
+
+
+### Documentation
+
+* add issue templates for bug reports and feature requests ([2e39efc](https://github.com/AndreVarandas/clash-royale-api-py/commit/2e39efcf81cf4b0521c64bd1fbb5f42d505d13f3))
+
 ## [0.1.0] - 2026-11-12
 
 ### Added
