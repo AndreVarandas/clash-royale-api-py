@@ -34,6 +34,9 @@ classifiers = [
 Homepage = "https://github.com/AndreVarandas/clash-royale-api-py"
 Repository = "https://github.com/AndreVarandas/clash-royale-api-py"
 Documentation = "https://andrevarandas.github.io/clash-royale-api-py/"
+Changelog = "https://github.com/AndreVarandas/clash-royale-api-py/blob/main/CHANGELOG.md"
+Issues = "https://github.com/AndreVarandas/clash-royale-api-py/issues"
+Security = "https://github.com/AndreVarandas/clash-royale-api-py/security/policy"
 
 [dependency-groups]
 dev = [
