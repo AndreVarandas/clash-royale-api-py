@@ -14,6 +14,15 @@ from .exceptions import InvalidTagError
 # The only characters that can legally appear inside a Clash Royale tag.
 TAG_ALPHABET = frozenset("0289PYLQGRJCUV")
 
+_INVALID_TAG_HINT = (
+    "A Clash Royale tag looks like #2PP and only uses these characters: "
+    "0289PYLQGRJCUV. Check that you copied the whole tag without extra text."
+)
+
+
+def _invalid_tag(tag: str) -> InvalidTagError:
+    return InvalidTagError(f"Invalid tag {tag!r}. {_INVALID_TAG_HINT}")
+
 
 def normalize_tag(tag: str) -> str:
     """Return *tag* cleaned up: no ``#``, no spaces, uppercased.
@@ -25,10 +34,10 @@ def normalize_tag(tag: str) -> str:
     """
     cleaned = tag.strip().replace(" ", "").replace("%23", "#").replace("#", "").upper()
     if not cleaned:
-        raise InvalidTagError(tag)
+        raise _invalid_tag(tag)
     invalid = set(cleaned) - TAG_ALPHABET
     if invalid:
-        raise InvalidTagError(tag)
+        raise _invalid_tag(tag)
     return cleaned
 
 

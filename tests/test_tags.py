@@ -30,5 +30,8 @@ def test_path_segment_is_url_encoded():
 
 @pytest.mark.parametrize("tag", ["", "   ", "hello world!", "###", "xyz123"])
 def test_invalid_tags_are_caught_early(tag):
-    with pytest.raises(InvalidTagError):
+    with pytest.raises(InvalidTagError) as excinfo:
         normalize_tag(tag)
+    message = str(excinfo.value)
+    assert "Invalid tag" in message
+    assert "0289PYLQGRJCUV" in message
