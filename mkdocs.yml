@@ -16,9 +16,15 @@ markdown_extensions:
   - admonition
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.snippets:
+      base_path: ["."]
+      check_paths: true
 nav:
   - Home: index.md
   - Configuration: configuration.md
   - Resources: resources.md
   - Models: models.md
   - Errors: errors.md
+  - Changelog: changelog.md
+  - Contributing: contributing.md
+  - Security: security.md
