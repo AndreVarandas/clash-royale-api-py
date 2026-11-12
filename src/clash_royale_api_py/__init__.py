@@ -37,7 +37,7 @@ from .pagination import AsyncPage, Page, Paging
 try:
     __version__ = version("clash-royale-api-py")
 except PackageNotFoundError:  # running from a source tree that isn't installed
-    __version__ = "0.0.0"
+    __version__ = "0.2.0"
 
 __all__ = [
     "AsyncClashRoyaleAPI",
