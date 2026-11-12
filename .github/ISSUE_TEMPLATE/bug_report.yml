@@ -1,0 +1,77 @@
+name: Bug report
+description: Something is not working as expected.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this.
+
+        **Never paste your API token.** Remove it from code, logs and screenshots
+        before submitting. If a token was exposed, revoke it at
+        https://developer.clashroyale.com/#/account.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: The smallest snippet that triggers the problem.
+      render: python
+      placeholder: |
+        from clash_royale_api_py import ClashRoyaleAPI
+
+        api = ClashRoyaleAPI()
+        clan = api.clans.get("2PP")
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Library version
+      description: Output of `python -c "import clash_royale_api_py; print(clash_royale_api_py.__version__)"`.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      placeholder: "3.15.2"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "macOS 15, Ubuntu 24.04, Windows 11..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Traceback or logs
+      description: Paste the full traceback if there is one.
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I removed my API token and personal data from everything above.
+          required: true
+        - label: I searched the existing issues and did not find a duplicate.
+          required: true

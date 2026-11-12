@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://andrevarandas.github.io/clash-royale-api-py/
+    about: Setup, resources, models, configuration and error handling.
+  - name: Security vulnerability
+    url: https://github.com/AndreVarandas/clash-royale-api-py/security/advisories/new
+    about: Please report security issues privately, not in a public issue.
