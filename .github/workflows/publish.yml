@@ -15,8 +15,6 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
-        with:
-          python-version-file: ".python-version"
 
       - name: Check that the tag matches the package version
         run: |

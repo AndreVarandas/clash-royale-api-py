@@ -17,7 +17,7 @@ Get a free token at https://developer.clashroyale.com/#/account.
 
 from __future__ import annotations
 
-from importlib.metadata import PackageNotFoundError, version
+from importlib.metadata import version
 
 from .client import AsyncClashRoyaleAPI, ClashRoyaleAPI
 from .exceptions import (
@@ -34,10 +34,7 @@ from .exceptions import (
 )
 from .pagination import AsyncPage, Page, Paging
 
-try:
-    __version__ = version("clash-royale-api-py")
-except PackageNotFoundError:  # running from a source tree that isn't installed
-    __version__ = "0.0.0"
+__version__ = version("clash-royale-api-py")
 
 __all__ = [
     "AsyncClashRoyaleAPI",
