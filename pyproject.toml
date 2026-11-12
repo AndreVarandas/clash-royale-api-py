@@ -1,6 +1,6 @@
 [project]
 name = "clash-royale-api-py"
-version = "0.1.1"
+version = "0.1.2"
 description = "An unofficial Python wrapper for the official Clash Royale API."
 readme = "README.md"
 license = "MIT"
