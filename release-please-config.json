@@ -22,7 +22,13 @@
       "package-name": "clash-royale-api-py",
       "changelog-path": "CHANGELOG.md",
       "bump-minor-pre-major": true,
-      "bump-patch-for-minor-pre-major": false
+      "bump-patch-for-minor-pre-major": false,
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "uv.lock"
+        }
+      ]
     }
   }
 }
