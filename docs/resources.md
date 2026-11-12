@@ -101,11 +101,11 @@ data = api.raw.get("/clans/%232PP/members", params={"limit": 10})
 A `Page` is a sequence: iterate it, index it, take its length.
 
 ```python
-page = api.clans.members("2PP")     # one request
-for member in page:                 # that page only
+page = api.clans.members("2PP")  # one request
+for member in page:  # that page only
     print(member.name)
 
-for member in page.iter_all():      # follows the cursors for you
+for member in page.iter_all():  # follows the cursors for you
     print(member.name)
 ```
 

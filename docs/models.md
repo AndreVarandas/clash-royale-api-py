@@ -6,7 +6,7 @@ by aliases, so you never write `clanScore`.
 
 ```python
 clan = api.clans.get("2PP")
-clan.clan_score      # 50000
+clan.clan_score  # 50000
 clan.required_trophies
 ```
 
@@ -84,8 +84,8 @@ its first translation and compares equal to a string, so both cases read the
 same:
 
 ```python
-print(card.name)            # works for either shape
-card.name == "Knight"       # True
+print(card.name)  # works for either shape
+card.name == "Knight"  # True
 ```
 
 ## Paginated results

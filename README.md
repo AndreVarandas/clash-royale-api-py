@@ -52,9 +52,10 @@ No token argument? The client reads the `CLASH_ROYALE_API_TOKEN`
 
 ```python
 import os
+
 os.environ["CLASH_ROYALE_API_TOKEN"] = "your-token"
 
-api = ClashRoyaleAPI()          # reads the env var for you
+api = ClashRoyaleAPI()  # reads the env var for you
 player = api.players.get("#LPP289")
 print(player.name, player.trophies, player.arena.name)
 ```
@@ -67,6 +68,7 @@ Both clients share one implementation and behave the same way:
 import asyncio
 from clash_royale_api_py import AsyncClashRoyaleAPI
 
+
 async def main():
     async with AsyncClashRoyaleAPI("your-token") as api:
         clan = await api.clans.get("2PP")
@@ -75,6 +77,7 @@ async def main():
         entries = await api.leaderboards.get(0)
         async for entry in entries.iter_all():
             print(entry.rank, entry.name)
+
 
 asyncio.run(main())
 ```
@@ -107,11 +110,11 @@ from clash_royale_api_py import AuthenticationError, InvalidTagError, NotFoundEr
 try:
     clan = api.clans.get("2PP")
 except InvalidTagError as e:
-    print(e)          # bad tag characters, raised before any request
+    print(e)  # bad tag characters, raised before any request
 except AuthenticationError as e:
-    print(e)          # invalid token, or the server IP isn't whitelisted
+    print(e)  # invalid token, or the server IP isn't whitelisted
 except NotFoundError as e:
-    print(e.status)   # 404 (this also catches GoneError, a 410)
+    print(e.status)  # 404 (this also catches GoneError, a 410)
 ```
 
 Throttled (429) and 5xx responses are retried with exponential backoff by

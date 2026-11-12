@@ -18,7 +18,7 @@ You need an API token only for the live smoke test. Create one at
 ```bash
 uv run pytest --cov --cov-fail-under=100   # tests + coverage gate
 uv run ruff check src tests scripts examples
-uv run ruff format src tests scripts examples
+uv run ruff format .
 uv run mypy src
 uv run mkdocs serve
 uv run python scripts/smoke.py             # live API, needs a token

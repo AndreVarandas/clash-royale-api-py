@@ -23,7 +23,7 @@ from clash_royale_api_py import ClashRoyaleAPI
 
 api = ClashRoyaleAPI("your-token")
 
-clan = api.clans.get("2PP")      # "#2PP", "2pp", " 2PP " — all accepted
+clan = api.clans.get("2PP")  # "#2PP", "2pp", " 2PP " — all accepted
 print(clan.name, clan.clan_score)
 ```
 
@@ -37,11 +37,11 @@ Endpoints that return many results hand you a `Page`, which is iterable.
 One page when you want it, everything when you don't:
 
 ```python
-page = api.clans.members("2PP")        # one page
+page = api.clans.members("2PP")  # one page
 for member in page:
     print(member.name)
 
-for member in page.iter_all():         # every remaining page, fetched for you
+for member in page.iter_all():  # every remaining page, fetched for you
     print(member.name)
 ```
 

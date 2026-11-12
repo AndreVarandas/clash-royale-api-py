@@ -70,9 +70,9 @@ backoff and jitter, respecting `Retry-After` when the API sends it.
 ```python
 api = ClashRoyaleAPI(
     token,
-    max_retries=5,        # 3 by default; 0 disables retries
-    retry_backoff=1.0,    # base delay in seconds, 0.5 by default
-    max_retry_delay=30.0, # cap for any single wait, 60s by default
+    max_retries=5,  # 3 by default; 0 disables retries
+    retry_backoff=1.0,  # base delay in seconds, 0.5 by default
+    max_retry_delay=30.0,  # cap for any single wait, 60s by default
 )
 ```
 
