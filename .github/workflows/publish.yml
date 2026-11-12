@@ -3,47 +3,75 @@ name: Publish
 on:
   release:
     types: [published]
+  workflow_run:
+    workflows: ["Release"]
+    types: [completed]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  build:
+  check:
+    # A failed Release run created nothing to publish.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.check.outputs.should_publish }}
+      ref: ${{ steps.check.outputs.ref }}
+      version: ${{ steps.check.outputs.version }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-
-      - name: Check that the tag matches the package version
-        run: |
-          tag="${GITHUB_REF_NAME#v}"
-          version=$(uv run python -c "import tomllib,pathlib; print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
-          echo "tag=$tag version=$version"
-          test "$tag" = "$version"
-
-      - name: Build distributions
-        run: uv build
-
-      - uses: actions/upload-artifact@v4
         with:
-          name: dist
-          path: dist/
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.ref }}
+
+      - name: Decide whether this version still needs publishing
+        id: check
+        run: |
+          version=$(python3 -c "import pathlib,tomllib; print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "ref=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=${{ github.ref }}" >> "$GITHUB_OUTPUT"
+          fi
+
+          if curl -sf "https://pypi.org/pypi/clash-royale-api-py/$version/json" > /dev/null; then
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+            echo "$version is already on PyPI, nothing to do."
+          else
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+            echo "$version is not on PyPI yet."
+          fi
 
   publish:
-    needs: build
+    needs: check
+    if: needs.check.outputs.should_publish == 'true'
     runs-on: ubuntu-latest
     environment:
       name: pypi
       url: https://pypi.org/project/clash-royale-api-py/
     permissions:
       id-token: write
+      contents: read
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
         with:
-          name: dist
-          path: dist/
+          ref: ${{ needs.check.outputs.ref }}
+
+      - name: Check that the tag matches the package version
+        if: github.event_name == 'release'
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          echo "tag=$tag version=${{ needs.check.outputs.version }}"
+          test "$tag" = "${{ needs.check.outputs.version }}"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Build distributions
+        run: uv build
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
