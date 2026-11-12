@@ -1,4 +1,6 @@
 {
+  "pull-request-header": "Automated release PR. Review the changelog entry and the proposed version, then merge.",
+  "pull-request-footer": "Merging this PR creates the `vX.Y.Z` tag and GitHub release. The Publish workflow then uploads the distributions to PyPI. Do not edit `pyproject.toml` or `CHANGELOG.md` in this PR by hand.",
   "packages": {
     ".": {
       "release-type": "python",
