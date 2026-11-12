@@ -10,6 +10,14 @@ Releases after 0.1.0 are prepared automatically by
 [Conventional Commits](https://www.conventionalcommits.org/). Do not edit the
 generated sections by hand.
 
+## [0.1.2](https://github.com/AndreVarandas/clash-royale-api-py/compare/v0.1.1...v0.1.2) (2026-11-12)
+
+
+### Bug Fixes
+
+* **tags:** actionable message for invalid tags ([bd8c510](https://github.com/AndreVarandas/clash-royale-api-py/commit/bd8c510dbb5439288fc95f7b37917954a5cba05f))
+* **tags:** return an actionable message for invalid tags ([43d454c](https://github.com/AndreVarandas/clash-royale-api-py/commit/43d454ce729a0e635ed1564fe0e40da093b2b0f5))
+
 ## [0.1.1](https://github.com/AndreVarandas/clash-royale-api-py/compare/v0.1.0...v0.1.1) (2026-11-12)
 
 
