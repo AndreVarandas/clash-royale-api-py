@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -45,3 +45,10 @@ jobs:
           uv venv /tmp/wheel-check
           uv pip install --python /tmp/wheel-check/bin/python dist/*.whl
           /tmp/wheel-check/bin/python -c "import clash_royale_api_py as c; print(c.__version__)"
+
+  # Single required check for branch protection, independent of the matrix.
+  test:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "All supported Python versions passed."
