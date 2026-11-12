@@ -1,0 +1,24 @@
+site_name: clash-royale-api-py
+site_description: An unofficial Python wrapper for the official Clash Royale API.
+site_url: https://andrevarandas.github.io/clash-royale-api-py/
+repo_url: https://github.com/AndreVarandas/clash-royale-api-py
+repo_name: AndreVarandas/clash-royale-api-py
+edit_uri: edit/main/docs/
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: amber
+  features:
+    - content.code.copy
+    - navigation.sections
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+nav:
+  - Home: index.md
+  - Configuration: configuration.md
+  - Resources: resources.md
+  - Models: models.md
+  - Errors: errors.md

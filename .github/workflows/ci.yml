@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Lint
+        run: uv run ruff check src tests scripts examples
+
+      - name: Check formatting
+        run: uv run ruff format --check src tests scripts examples
+
+      - name: Type check
+        run: uv run mypy src
+
+      - name: Test
+        run: uv run pytest --cov --cov-fail-under=100
+
+      - name: Build distributions
+        run: uv build
+
+      - name: Verify the built wheel installs and imports
+        run: |
+          uv venv /tmp/wheel-check
+          uv pip install --python /tmp/wheel-check/bin/python dist/*.whl
+          /tmp/wheel-check/bin/python -c "import clash_royale_api_py as c; print(c.__version__)"
