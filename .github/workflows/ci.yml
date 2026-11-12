@@ -6,13 +6,21 @@ on:
   pull_request:
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.15"]
+    env:
+      UV_PYTHON: ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: uv sync
@@ -37,3 +45,10 @@ jobs:
           uv venv /tmp/wheel-check
           uv pip install --python /tmp/wheel-check/bin/python dist/*.whl
           /tmp/wheel-check/bin/python -c "import clash_royale_api_py as c; print(c.__version__)"
+
+  # Single required check for branch protection, independent of the matrix.
+  test:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "All supported Python versions passed."
