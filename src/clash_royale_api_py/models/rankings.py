@@ -1,11 +1,9 @@
-"""Ranking models for locations, seasons, and leaderboards."""
+"""Ranking models for locations and seasons."""
 
 from __future__ import annotations
 
-from typing import Any
-
 from ._base import ClashRoyaleModel
-from .common import Arena, BadgeUrls, Location
+from .common import Arena, BadgeUrls
 
 __all__ = [
     "PlayerPathOfLegendRanking",
@@ -45,11 +43,3 @@ class PlayerPathOfLegendRanking(ClashRoyaleModel):
     rank: int | None = None
     elo_rating: int | None = None
     clan: PlayerRankingClan | None = None
-
-
-class Leaderboard(ClashRoyaleModel):
-    """A leaderboard available for the current trophy road season."""
-
-    id: int | None = None
-    name: Location | None = None  # localized name payload
-    leagues: list[Any] | None = None
